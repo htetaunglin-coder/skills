@@ -19,7 +19,7 @@ Paths in this rule assume `src/features/<x>`, `src/components/ui`, `src/lib`, `s
 
 ## Layers
 
-Imports flow one way: shared → features → app. Shared imports only shared. A feature imports shared and itself. `src/app` imports both and owns nothing feature-specific: a route file, a route handler, `proxy.ts`, and the root layout are glue that composes features. Features never import each other. Enforce this with a linter (`eslint-plugin-boundaries` with three element types and one allow-list), and keep this section as the reason.
+Imports flow one way: shared → features → app. Shared imports only shared. A feature imports shared and itself. `src/app` imports both and owns nothing feature-specific: a route file, a route handler, `proxy.ts`, and the root layout are glue that composes features. Features never import each other. A linter holds the direction (see Tooling); this section holds the reason.
 
 When a feature or a shared component needs another feature's state, the app layer composes them: it mounts the provider and passes data or a component in as props or `children`. Vercel `patterns-children-over-render-props` (pass markup as children) carries the form. A file that reaches into several features is split per feature or inverted the same way.
 
@@ -35,8 +35,6 @@ When a feature or a shared component needs another feature's state, the app laye
 2. When a file must shrink, one cohesive responsibility moves to a feature-local file. One consumer is enough.
 3. A file already over the limit may take a focused change without restructuring, and the size is reported. When the task touches a block that the two questions above would extract, the extraction happens first and the change lands in the new file.
 4. When meeting the limit would force unrelated restructuring or a worse separation, the conflict is surfaced instead of the split.
-
-The number makes the size check consistent. Choosing what to extract still follows the two questions above.
 
 ## Options that branch on the caller
 
@@ -86,6 +84,10 @@ Class strings stay on the element. Repetition alone does not extract a component
 - Framework-mandated files: route files, `instrumentation.ts`, config. They live where the framework looks.
 - Design-system primitives in `src/components/ui`. Shared by definition.
 - End-to-end tests at the project root. They outlive any internal layout.
+
+## Tooling
+
+A linter holds two parts of this rule: the layer direction, as an import restriction with three element types and one allow-list (`eslint-plugin-boundaries` or `no-restricted-imports` patterns on ESLint; `noRestrictedImports` on Biome), and the file size limit (`max-lines` at 1,000 on ESLint; Biome `style/noExcessiveLinesPerFile` with `maxLines: 1000`, off by default and 300 when turned on bare; generated and static-data files excluded in either). The scopes, the two questions, and the options gate are review work. The repository's own linter and config win; these are the names to look for. Checked 2026-09 against ESLint 9.39, Biome 2.3.
 
 ## Sources
 
