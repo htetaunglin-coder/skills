@@ -1,6 +1,7 @@
 ---
 name: frontend-standards
 description: "Opinionated house rules for React, Next.js, and Tailwind code in a feature-based layout, covering what the Vercel skills leave out: colocation and extraction, the Tailwind cva ladder, comments and JSDoc, file order, magic literals and `as const` unions, conditional rendering, and per-request state. Use when writing or reviewing frontend components, hooks, feature folders, className props, comments, file layout, literals, conditional branches, or stores and providers."
+license: MIT
 ---
 
 # Frontend Standards
