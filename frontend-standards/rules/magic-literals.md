@@ -57,8 +57,4 @@ A number inside a Tailwind class, `w-[347px]`, is the same literal in class form
 
 ## Tooling
 
-No linter carries this gate. ESLint `no-magic-numbers` is frozen; it allows JSX numbers, variable initializers, and object values by default and reports every other literal in an expression or a call, so `radius * 2` and `5 * 60 * 1000` fail under any option set. Biome `style/noMagicNumbers` has no options and ignores `2`, `10`, `24`, `60`, wider than this rule. None covers strings. The gate is review work; a linter, when a repository wants one, runs at warning level. Checked 2026-09 against ESLint 9.39, Biome 2.1.
-
-## Sources
-
-Martin Fowler: Refactoring, Replace Magic Literal. Robert C. Martin: Clean Code, ch. 17 G25 Replace Magic Numbers with Named Constants. Steve McConnell: Code Complete, ch. 12.1 Numbers in General. Google TypeScript Style Guide: Identifiers, Enums. Airbnb JavaScript Style Guide: Naming Conventions 23.10. TypeScript Handbook: Enums, Objects vs Enums; TypeScript 5.8 release notes, `--erasableSyntaxOnly`. Matt Pocock: enums vs `as const`. ESLint, typescript-eslint, Biome: `no-magic-numbers` rule docs. Tailwind docs: arbitrary values, theme variables.
+No linter carries this gate: `no-magic-numbers` reports formula constants this rule keeps inline and covers no strings. The gate is review work. Details are in [TOOLING.md](../TOOLING.md).

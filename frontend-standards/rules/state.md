@@ -23,7 +23,3 @@ export function SessionProvider({ session, children }: SessionProviderProps) {
   return <SessionStoreContext value={store}>{children}</SessionStoreContext>;
 }
 ```
-
-## Sources
-
-Zustand docs: Setup with Next.js (per-request store, no global stores, server components never touch the store); Initialize state with props. TkDodo: Zustand and React Context. Vercel `react-best-practices`: `server-no-shared-module-state`.

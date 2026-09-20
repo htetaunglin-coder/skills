@@ -74,8 +74,4 @@ A button look on a `<label>` or an `<a>` is one visual contract on different ele
 
 ## Tooling
 
-Class order belongs to the formatter: `prettier-plugin-tailwindcss` with `tailwindFunctions: ["cn", "cva"]`. The rule text carries no ordering convention. Checked 2026-09 against Tailwind 4, tailwind-merge 3.7, React types 19.2.
-
-## Sources
-
-Tailwind docs: Styling with utility classes, Managing duplication; Theme variables; Detecting classes in source files. CVA docs: Variants. tailwind-merge: When and how to use it. shadcn skill rules: styling. Kent C. Dodds: AHA Programming. Sandi Metz: The Wrong Abstraction.
+Class order belongs to the formatter, `prettier-plugin-tailwindcss`. The rule text carries no ordering convention. Details are in [TOOLING.md](../TOOLING.md).

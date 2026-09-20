@@ -25,7 +25,7 @@ When a feature or a shared component needs another feature's state, the app laye
 
 ## Two decisions, two questions
 
-**Extract** (give it a name, maybe a file): write the problem the separation solves in one sentence. "The parent stops reading top to bottom." "This function needs a test the component cannot host." "The editor is 300 lines of cohesive behavior and drowns the page." The sentence must pass one test: a typical change to this code is now understandable with less context, not more. A real sentence earns the extraction, and one consumer is enough. "It might be reused" is not a problem yet, so the code stays. The same test runs in reverse: several short files that every change has to trace together are consolidated into the file that owns the state. A file path the task itself mandates wins over this rule.
+**Extract** (give it a name, maybe a file): write the problem the separation solves in one sentence. "The parent stops reading top to bottom." "This function needs a test the component cannot host." "The editor is 300 lines of cohesive behavior and drowns the page." The sentence must pass one test: a typical change to this code is now understandable with less context, not more. A real sentence earns the extraction, and one consumer is enough. "It might be reused" is not a problem yet, so the code stays. The context test runs in reverse as a deletion test: delete the extracted piece in your head. When the complexity vanishes, it was a pass-through and folds back into its caller. When it reappears in every caller, it earned its place. Several short files that every change has to trace together fail the deletion test and are consolidated into the file that owns the state. A file path the task itself mandates wins over this rule.
 
 **Share** (move to a scope more than one feature imports): the consumers rely on one concept that must change together. A pricing policy, an auth check, a date format the whole site shows. Two features that need the same policy get one owner in the shared scope, even at two. Two helpers that merely look alike and have different reasons to change stay separate.
 
@@ -59,7 +59,7 @@ function formatPrice(cents: number) {
 <p>Total: {formatPrice(total)}</p>
 ```
 
-When an option like that appears, reassess whether the callers still share one concept. Separate diverging behavior into its own function or component, or let the caller pass the varying part as an argument, a callback, or `children`. Vercel `architecture-avoid-boolean-props` (compose instead of adding mode flags) and `patterns-children-over-render-props` (pass markup as children) carry the component form.
+When an option like that appears, reassess whether the callers still share one concept. The deletion test says which: delete the function, and the callers that regain the whole computation share the concept; the caller that regains only its flag did not. Separate diverging behavior into its own function or component, or let the caller pass the varying part as an argument, a callback, or `children`. Vercel `architecture-avoid-boolean-props` (compose instead of adding mode flags) and `patterns-children-over-render-props` (pass markup as children) carry the component form.
 
 ## Per kind
 
@@ -87,8 +87,4 @@ Class strings stay on the element. Repetition alone does not extract a component
 
 ## Tooling
 
-A linter holds two parts of this rule: the layer direction, as an import restriction with three element types and one allow-list (`eslint-plugin-boundaries` or `no-restricted-imports` patterns on ESLint; `noRestrictedImports` on Biome), and the file size limit (`max-lines` at 1,000 on ESLint; Biome `style/noExcessiveLinesPerFile` with `maxLines: 1000`, off by default and 300 when turned on bare; generated and static-data files excluded in either). The scopes, the two questions, and the options gate are review work. The repository's own linter and config win; these are the names to look for. Checked 2026-09 against ESLint 9.39, Biome 2.3.
-
-## Sources
-
-Kent C. Dodds: AHA Programming, AHA Testing, Colocation, Inversion of Control, When to break up a component. Sandi Metz: The Wrong Abstraction.
+A linter holds the layer direction and the file size limit. The scopes, the two questions, and the options gate are review work. Rule names and options are in [TOOLING.md](../TOOLING.md).

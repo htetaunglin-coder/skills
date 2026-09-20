@@ -64,8 +64,4 @@ return <View order={order} />;
 
 ## Tooling
 
-`react/jsx-no-leaked-render` is off in `plugin:react/recommended`; turned on with `validStrategies: ["ternary", "coerce"]`, it accepts comparisons and `!!` and flags a bare boolean variable on the left of `&&` (see Guards). ESLint `no-nested-ternary` holds the nesting rule. Checked 2026-09 against eslint-plugin-react 7.37, ESLint 9.39.
-
-## Sources
-
-React docs: Conditional Rendering; Rules of Hooks. Kent C. Dodds: Use ternaries rather than && in JSX; When to break up a component into multiple components. Josh Comeau: Common Beginner Mistakes with React. Airbnb JavaScript Style Guide 15.6, 15.7; Airbnb React Style Guide, parentheses. ESLint `no-nested-ternary`; eslint-plugin-react `jsx-no-leaked-render`. Vercel `react-best-practices`: `rendering-conditional-render`, `rerender-no-inline-components`, `rendering-hoist-jsx`; `composition-patterns`: `patterns-explicit-variants`, `architecture-avoid-boolean-props`. The IIFE and map rows are house opinion; no primary source covers them.
+A linter holds the leaked `&&` render and the nested ternary. The ladder is review work. Rule names and options are in [TOOLING.md](../TOOLING.md).

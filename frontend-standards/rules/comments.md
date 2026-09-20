@@ -1,7 +1,7 @@
 ---
 title: Comments, what the code cannot say
 impact: MEDIUM
-tags: comments, jsdoc, todo, naming, self-documenting
+tags: comments, tsdoc, todo, naming, self-documenting
 ---
 
 # Comments: what the code cannot say
@@ -47,9 +47,9 @@ A block that needs a section comment is a candidate for the colocation context t
 
 `/** */` is for the reader at the use site, who sees it on hover. `//` is for the reader of this line. A module-private constant read elsewhere in the file takes `/** */` when the fact is needed at the use site. Multi-line implementation notes use several `//` lines. Inside JSX, a comment is `{/* */}`.
 
-A JSDoc block goes on an export when the signature leaves the caller a question: a unit, a range, a side effect, a precondition, what happens on failure, what a hook returns where the caller cannot see (the server render, before hydration), or `@deprecated` with the replacement named. The name and the types answer the rest, so an export whose signature answers every question has no block.
+A TSDoc block goes on an export when the signature leaves the caller a question: a unit, a range, a side effect, a precondition, what happens on failure, what a hook returns where the caller cannot see (the server render, before hydration), or `@deprecated` with the replacement named. The name and the types answer the rest, so an export whose signature answers every question has no block. The signature and the block together are the interface: every fact a caller must know to use the export correctly. When a fact the caller needs is in neither, it goes into the block.
 
-Types never appear in a JSDoc tag; TypeScript owns them. A `@param` or `@returns` line exists only when it adds a fact the type lacks. The fields of a type, props included, are documented on the field, where hover shows them, and only the fields that leave a question; a field doc carries a why when the field's placement needs one. A component takes no block that lists its props.
+Types never appear in a TSDoc tag; TypeScript owns them. A `@param` or `@returns` line exists only when it adds a fact the type lacks. The fields of a type, props included, are documented on the field, where hover shows them, and only the fields that leave a question; a field doc carries a why when the field's placement needs one. A component takes no block that lists its props.
 
 ```tsx
 // Incorrect: restates the signature
@@ -86,8 +86,4 @@ A change to a line re-reads the comments above it and beside it. A comment the c
 
 ## Tooling
 
-Linters hold parts of this rule, and only parts. `jsdoc/informative-docs` flags a doc that restates the name. `jsdoc/no-types` flags a type in a tag. `unicorn/expiring-todo-comments` reads a machine-checkable condition in brackets, `TODO [2027-01-01]` or `TODO [-legacy-parser]`, and fails when it is met; it cannot read a prose trigger. `no-warning-comments` reports every TODO, FIXME, or XXX with no view of whether an issue is attached. The issue reference, the delete test, and the wording are review work. Biome has no equivalent rule.
-
-## Sources
-
-Kevlin Henney: Comment Only What the Code Cannot Say. John Ousterhout: A Philosophy of Software Design, ch. 12–16. Steve McConnell: Code Complete, ch. 32. Martin Fowler: Refactoring, the Comments smell. Robert C. Martin: Clean Code, ch. 4. Hillel Wayne: Comment the Why and the What; Why Not Comments. antirez: Writing system software, code comments. Google: TypeScript Style Guide, Comments and documentation; Testing on the Toilet, To Comment or Not to Comment; Less Is More. Ellen Spertus: Best practices for writing code comments. sergiodxa: comments-meaningful-only. ASD-STE100 and plainlanguage.gov for wording.
+A linter holds the doc that restates the name, a type in a tag, and a TODO with a bracketed date. The issue reference, the delete test, and the wording are review work. Rule names are in [TOOLING.md](../TOOLING.md).

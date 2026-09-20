@@ -78,8 +78,4 @@ Hooks, then derived values, then handlers, then early returns, then JSX. A value
 
 ## Tooling
 
-The order relies on hoisting, so the linter guards the one runtime hazard, a `const` or `class` read at import time before its line, and allows both a `function` declaration below its caller and a function body that reads a `const` declared below it: ESLint `no-use-before-define` with `{ functions: false, classes: true, variables: false, allowNamedExports: false }` (`variables: false` ignores a reference from an inner function scope and still reports one in the same scope), or `@typescript-eslint/no-use-before-define` with the same plus `typedefs: false, ignoreTypeReferences: true`. Biome `correctness/noInvalidUseBeforeDeclaration` has the same behavior with no options. Import order belongs to the formatter or import sorter, not to this rule. `perfectionist/sort-modules` orders by kind and name and conflicts with the ownership slot, so it stays off. Checked 2026-09 against Next 16.2, ESLint 9.39, Biome 2.
-
-## Sources
-
-Robert C. Martin: Clean Code, ch. 3 The Stepdown Rule, ch. 5 Vertical Formatting. Steve McConnell: Code Complete, ch. 31.8 Laying Out Classes and Files. Google TypeScript Style Guide: Source file structure, Exports, Function declarations. Airbnb JavaScript Style Guide: Hoisting, Functions (the define-before-use position, resolved here by `function` declarations). MDN: Hoisting, Temporal dead zone, Modules. ESLint and typescript-eslint: `no-use-before-define`. Kent C. Dodds: Colocation. Dan Abramov: A Complete Guide to useEffect, hoisting functions that use no component scope.
+A linter holds the one runtime hazard, a `const` or `class` read at import time before its line, and allows a `function` declaration below its caller. Import order belongs to the formatter or import sorter, not to this rule. Rule names and options are in [TOOLING.md](../TOOLING.md).
