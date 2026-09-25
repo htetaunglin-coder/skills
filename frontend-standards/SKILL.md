@@ -8,11 +8,12 @@ license: MIT
 
 House rules that complement the Vercel skills. Every reference to a Vercel rule or to another skill carries a one-line meaning, so the rules read without them installed.
 
-Precedence, in order:
+Precedence, in order. On a conflict, follow the higher item and name the conflict in one line of the reply.
 
-1. The repository's own standards (`AGENTS.md`, `CLAUDE.md`, and whatever they point at). These rules fill the room the repository leaves. On a conflict with the repository or with a Vercel rule, follow the higher item and say the conflict exists.
-2. Vercel `react-best-practices` for measured performance, `composition-patterns` for component APIs, the `nextjs` skill for framework mechanics, the `shadcn` skill for component-library conventions. Matt Pocock's `codebase-design` for the shape of a hook, data module, or lib function interface (small interface, much behavior behind it, tested through it). Read the rule the task touches, not the whole skill.
-3. These rules for default code shape and for where the result lives.
+1. An instruction in the task that names a choice: "use an `enum`", "keep the reason in the PR", "put it in `lib/format.ts`". A request to match the file, or to follow a note in it, leaves the choice to these rules. The per-request store in [state](rules/state.md) holds against any instruction, because it prevents a data leak.
+2. The repository's own standards (`AGENTS.md`, `CLAUDE.md`, and whatever they point at). These rules fill the room the repository leaves.
+3. Vercel `react-best-practices` for measured performance, `composition-patterns` for component APIs, the Next.js docs bundled in `node_modules/next/dist/docs/` for framework mechanics, the `shadcn` skill for component-library conventions. Matt Pocock's `codebase-design` for the shape of a hook, data module, or lib function interface (small interface, much behavior behind it, tested through it). Read the rule the task touches, not the whole skill.
+4. These rules for default code shape and for where the result lives.
 
 ## Rules
 

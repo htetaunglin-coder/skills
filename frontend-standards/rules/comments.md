@@ -35,7 +35,7 @@ A comment describes the code as it is, never the edit that produced it. Git hold
 | Coupling | A change here needs a change elsewhere, when a type or a test cannot enforce it. | `// Keep in sync with the STATUS enum in the Prisma schema.` |
 | Reference | The issue, incident, spec, RFC, or source of copied code. The link sits beside the code. | `// Workaround for Safari smooth scroll in iframes. https://bugs.webkit.org/…` |
 
-The why lives in the code, beside the line it explains. A commit message repeats it; it never replaces it, because the next reader sees the file, not the log. When the task asks for the reason to live only in the PR, one line still goes beside the code, and the reply says so.
+The why lives in the code, beside the line it explains. A commit message repeats it; it never replaces it, because the next reader sees the file, not the log.
 
 ## Level
 
