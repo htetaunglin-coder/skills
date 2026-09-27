@@ -20,7 +20,9 @@ A comment is the residue after the code has been made to say it. Before a commen
 
 A local rename or an explaining variable is inside any task that touches the function. A rename of an exported name or an assertion changes more than the comment would: the rename touches every caller, and the assertion turns wrong output into a crash. When that change is outside the task, the comment is the stop, and the rename or the assertion is named in the reply.
 
-What is left passes one test: delete the comment. When a first-time reader recovers everything it said from the code in front of them, it stays deleted. When they must reconstruct it, by tracing other files, by re-measuring a trade-off, or by guessing at a reason, the comment stays.
+What is left passes one test: delete the comment. When a first-time reader recovers everything it said from the code in front of them, it stays deleted. When they must reconstruct it, by tracing other files, by re-measuring a trade-off, or by guessing at a reason, the comment stays if a wrong guess costs something no one sees at once: a bug, an undone trade-off, a broken contract. A mistake the page or a test shows at once leaves the comment deleted.
+
+Markup and its look are the usual case: JSX structure, a class list, a style value, a visual prop, or an override of a child component's default spacing shows its effect on the page, so the markup and the class names are the whole record. Comments go to logic: conditions, data flow, effects, business rules. A markup or styling line takes a comment only when the test above keeps it, most often as a Reference to a browser bug it works around or a Coupling to a value a script reads.
 
 A comment describes the code as it is, never the edit that produced it. Git holds the history, so commented-out code is deleted and "changed X to Y" lines are deleted.
 
@@ -45,7 +47,7 @@ A block that needs a section comment is a candidate for the colocation context t
 
 ## Doc comments
 
-`/** */` is for the reader at the use site, who sees it on hover. `//` is for the reader of this line. A module-private constant read elsewhere in the file takes `/** */` when the fact is needed at the use site. Multi-line implementation notes use several `//` lines. Inside JSX, a comment is `{/* */}`.
+`/** */` is for the reader at the use site, who sees it on hover. `//` is for the reader of this line. A module-private constant read elsewhere in the file takes `/** */` when the fact is needed at the use site. Multi-line implementation notes use several `//` lines. Inside JSX children, a comment is `{/* */}`; between the props of a tag, it is `//`.
 
 A TSDoc block goes on an export when the signature leaves the caller a question: a unit, a range, a side effect, a precondition, what happens on failure, what a hook returns where the caller cannot see (the server render, before hydration), or `@deprecated` with the replacement named. The name and the types answer the rest, so an export whose signature answers every question has no block. The signature and the block together are the interface: every fact a caller must know to use the export correctly. When a fact the caller needs is in neither, it goes into the block.
 

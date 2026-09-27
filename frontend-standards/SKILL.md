@@ -21,7 +21,7 @@ Precedence, in order. On a conflict, follow the higher item and name the conflic
 |---|---|
 | [colocation](rules/colocation.md) | Narrowest scope that matches ownership today. Extract on a named problem, share on shared ownership. |
 | [tailwind](rules/tailwind.md) | Classes stay on the element. Repetition is evidence, not a command. `cn` → map → `cva` by count. |
-| [comments](rules/comments.md) | Code says the what and the how first. A comment is the residue: why, why-not, warning, contract, coupling, reference. |
+| [comments](rules/comments.md) | Code says the what and the how first. A comment goes to logic a wrong edit could break unseen: why, why-not, warning, contract, coupling, reference. Markup and class names are their own record. |
 | [file-order](rules/file-order.md) | Newspaper order: imports, shared constants and types, main export, sub-components, helpers. A part's own constant sits above it. `function` declarations keep it top-down. |
 | [magic-literals](rules/magic-literals.md) | A literal stays inline when its meaning is on the line. It takes a name when a reader must decode it or a second reader appears. `as const` unions, no `enum`. |
 | [conditional-render](rules/conditional-render.md) | First row that holds the branch: early return → ternary → map → sub-component → variable before JSX → IIFE last. A ternary never nests. |
